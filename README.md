@@ -12,7 +12,11 @@ https://wacchoz.hatenablog.com/entry/2018/12/16/155500 (in Japanese)
 
 
 
-# Reference
+Wikipedia
+
+https://en.wikipedia.org/wiki/Adleman%E2%80%93Pomerance%E2%80%93Rumely_primality_test
+
+
 
 - [APR] Adleman, Leonard M.; Pomerance, Carl; Rumely, Robert S. (1983). "On distinguishing prime numbers from composite numbers". Annals of Mathematics. 117 (1): 173–206.
 - [Coh-Len1] Cohen, Henri; Lenstra, Hendrik W., Jr. (1984). "Primality testing and Jacobi sums". Mathematics of Computation. 42 (165): 297–330.
