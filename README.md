@@ -6,7 +6,7 @@ Python implementation of APR-CL primality test based on [Cohen].
 
 
 
-簡単にですが日本語で以下に解説しています。
+完全ではありませんが日本語で以下に解説したので、こちらも参照してください。
 
 https://wacchoz.hatenablog.com/entry/2018/12/16/155500 (in Japanese)
 
@@ -15,6 +15,10 @@ https://wacchoz.hatenablog.com/entry/2018/12/16/155500 (in Japanese)
 Wikipedia
 
 https://en.wikipedia.org/wiki/Adleman%E2%80%93Pomerance%E2%80%93Rumely_primality_test
+
+
+
+
 
 
 
