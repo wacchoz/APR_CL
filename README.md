@@ -10,7 +10,7 @@ Primality test takes few seconds for 100 digit number, and 10 minutes for 300 di
 
 APR-CL法(Adleman–Pomerance–Rumely-Cohen-Lenstra)による素数判定プログラムです。Pythonで書かれています。
 
-100桁なら数秒、300桁なら10分程度で素数判定ができます。
+100桁なら数秒、300桁なら数分で素数判定ができます。
 
 
 

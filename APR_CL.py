@@ -2,15 +2,8 @@
 
 import copy
 import time
+from math import gcd  # version >= 3.5
 
-def gcd(a, b):
-    if a<b:
-        return gcd(b,a)
-    r = b
-    while a%b!=0:
-        r = a%b
-        a,b = b, r
-    return r
 
 
 # primality test by trial division
@@ -66,19 +59,6 @@ def e(t):
             s *= q ** (1+v(q,t))
             q_list.append(q)
     return 2*s, q_list
-
-
-# a^k mod m
-def modpow(a, k, m):
-    ret = 1
-    while k>0:
-        if k%2==1:
-            ret *= a
-            ret %= m
-        a = (a*a) % m
-        k //= 2
-    return ret
-    
 
 # Jacobi sum
 class JacobiSum(object):
@@ -240,10 +220,10 @@ def calc_f(q):
     g = smallest_primitive_root(q)
     m = {}
     for x in range(1,q-1):
-        m[modpow(g,x,q)] = x
+        m[pow(g,x,q)] = x
     f = {}
     for x in range(1,q-1):
-        f[x] = m[ (1-modpow(g,x,q))%q ]
+        f[x] = m[ (1-pow(g,x,q))%q ]
 
     return f
 
@@ -386,7 +366,7 @@ def APRtest_step4b(p, k, q, N):
         return False, None
     else:
         # possible prime
-        if h%p!=0 and (modpow(q, (N-1)//2,N) + 1)%N==0:
+        if h%p!=0 and (pow(q,(N-1)//2,N) + 1)%N==0:
             l_p = 1
         else:
             l_p = 0
@@ -421,7 +401,7 @@ def APRtest_step4c(p, k, q, N):
         return False, None
     else:
         # possible prime
-        if h%p!=0 and (modpow(q, (N-1)//2,N) + 1)%N==0:
+        if h%p!=0 and (pow(q,(N-1)//2,N) + 1)%N==0:
             l_p = 1
         else:
             l_p = 0
@@ -433,7 +413,7 @@ def APRtest_step4d(p, k, q, N):
 
     print("Step 4d. (p^k, q = {0}^{1}, {2})".format(p,k,q))
 
-    S2q = modpow(-q, (N-1)//2, N)
+    S2q = pow(-q, (N-1)//2, N)
     if (S2q-1)%N != 0 and (S2q+1)%N != 0:
         # composite
         return False, None
@@ -517,7 +497,7 @@ def APRtest(N):
     l = {}
     fac_t = prime_factorize(t)
     for p, k in fac_t:
-        if p>=3 and modpow(N, p-1, p*p)!=1:
+        if p>=3 and pow(N, p-1, p*p)!=1:
             l[p] = 1
         else:
             l[p] = 0
@@ -591,8 +571,8 @@ if __name__ == '__main__':
 
     start_time = time.time()
 
-    APRtest(2**521-1)   # 157 digit, 27 sec
-#    APRtest(2**1279-1)  # 386 digit, 754 sec
+    APRtest(2**521-1)   # 157 digit, 18 sec
+#    APRtest(2**1279-1)  # 386 digit, 355 sec
 #    APRtest(2074722246773485207821695222107608587480996474721117292752992589912196684750549658310084416732550077)
 
     end_time = time.time()
