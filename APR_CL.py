@@ -184,6 +184,9 @@ class JacobiSum(object):
             elif (self.coef[i] - (-1)) %N != 0:
                 return False, None
         if one == 1:
+            # A single power zeta^h has no other nonzero coefficients.
+            if any(self.coef[i] != 0 for i in range(m) if i != h):
+                return False, None
             return True, h
 
         # case of zeta^h (h>=m)
@@ -447,6 +450,7 @@ def APRtest_step4(p, k, q, N):
 
 
 def APRtest(N):
+    """Return whether N is prime; raise RuntimeError if proof limits are exhausted."""
     t_list = [
         2,
         12,
@@ -469,9 +473,12 @@ def APRtest(N):
 
     print("N=", N)
 
-    if N<=3:
-        print("input should be greater than 3")
+    if N<2:
+        print("Not prime")
         return False
+    elif N<=3:
+        print("Prime!")
+        return True
  
     # Select t
     for t in t_list:
@@ -480,7 +487,7 @@ def APRtest(N):
             break
     else:
         print("t not found")
-        return False
+        raise RuntimeError("Primality test inconclusive: no suitable t in t_list")
 
     print("t=", t)
     print("e(t)=", et, q_list)
@@ -531,8 +538,8 @@ def APRtest(N):
             count = 0
             i = 1
             found = False
-            # try maximum 30 times
-            while count < 30:
+            # try maximum 300 times
+            while count < 300:
                 q = p*i+1
                 if N%q != 0 and isprime_slow(q) and (q not in q_list):
                     count += 1
@@ -551,7 +558,7 @@ def APRtest(N):
                 i += 1
             if not found:
                 print("error in Step 5")
-                return False
+                raise RuntimeError("Primality test inconclusive: Step 5 exhausted for p={}".format(p))
 
     # Step 6
     print("=== Step 6 ===")
